@@ -24,7 +24,7 @@ const App: React.FC = () => {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Discover Your Next Bot</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Discord bots</h1>
         </div>
         
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />

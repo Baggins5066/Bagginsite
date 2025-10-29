@@ -14,9 +14,6 @@ const Header: React.FC = () => {
           <BagginsIcon />
           <span className="text-white text-xl font-bold">Baggins <span className="font-light text-discord-gray">/ Discord Bots</span></span>
         </div>
-        <nav>
-          <a href="#" className="text-discord-light-gray hover:text-white transition-colors">Home</a>
-        </nav>
       </div>
     </header>
   );

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Bot } from '../types';
 
 interface BotProfileCardProps {
@@ -14,10 +14,22 @@ const VerifiedIcon: React.FC = () => (
 );
 
 const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
+  const [showAddButtons, setShowAddButtons] = useState(false);
+
+  const handleAddToServerClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowAddButtons(true);
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 animate-fade-in">
       <div className="bg-discord-dark rounded-xl shadow-2xl w-full max-w-2xl mx-auto transform animate-scale-in">
-        <div className="p-8 relative">
+        <div className="p-8 relative" onClick={(e) => {
+          const target = e.target as HTMLElement;
+          if (target.tagName !== 'A' && target.tagName !== 'BUTTON') {
+            setShowAddButtons(false);
+          }
+        }}>
           <button
             onClick={onClose}
             className="absolute top-4 right-4 text-discord-gray hover:text-white transition-colors bg-discord-darker rounded-full p-2"
@@ -50,13 +62,25 @@ const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-lg shadow-lg hover:shadow-xl">
-              Add (Admin)
-            </a>
-            <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-gray text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-lg shadow-lg hover:shadow-xl">
-              Add (Minimal)
-            </a>
+          <div className="grid grid-cols-1 gap-4">
+            {showAddButtons ? (
+              <>
+                <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-lg shadow-lg hover:shadow-xl flex justify-center items-center gap-2">
+                  <span>Add (Minimal)</span>
+                  <span className="text-xs bg-green-500 text-white font-bold px-2 py-0.5 rounded-full">Recommended</span>
+                </a>
+                <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-yellow-500 text-black font-bold py-3 px-6 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-lg shadow-lg hover:shadow-xl">
+                  Add (Admin)
+                </a>
+              </>
+            ) : (
+              <button
+                onClick={handleAddToServerClick}
+                className="md:col-span-2 w-full text-center bg-discord-blurple text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-lg shadow-lg hover:shadow-xl"
+              >
+                Add to Server
+              </button>
+            )}
           </div>
         </div>
       </div>

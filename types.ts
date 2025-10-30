@@ -5,7 +5,6 @@ export interface Bot {
   avatarUrl: string;
   description: string;
   tags: string[];
-  userCount: number;
   inviteUrl: string;
   isVerified: boolean;
 }

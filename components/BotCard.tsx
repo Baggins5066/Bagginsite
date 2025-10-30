@@ -1,11 +1,7 @@
 
-import React,
-{
-  useState,
-  useRef,
-  useEffect
-} from 'react';
+import React, { useState } from 'react';
 import { Bot } from '../types';
+import Popup from './Popup';
 
 interface BotCardProps {
   bot: Bot;
@@ -19,33 +15,24 @@ const VerifiedIcon: React.FC = () => (
 );
 
 const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
-  const [showAddButtons, setShowAddButtons] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleAddToServerClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setShowAddButtons(true);
+    setIsPopupOpen(true);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
-        setShowAddButtons(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const handleClosePopup = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setIsPopupOpen(false);
+  }
 
   return (
-    <div
-      ref={cardRef}
-      className="bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
-      onClick={() => onCardClick(bot)}
-    >
+    <>
+      <div
+        className="bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+        onClick={() => onCardClick(bot)}
+      >
         <div className="p-5 flex-grow">
           <div className="flex items-center mb-4">
             <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-16 h-16 rounded-full mr-4" />
@@ -67,27 +54,23 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
             ))}
           </div>
         </div>
-        <div className="bg-discord-darker p-4 flex items-center justify-between mt-auto h-28">
-          {showAddButtons ? (
-            <div className="w-full grid grid-cols-1 gap-2">
-              <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors flex justify-center items-center gap-2">
-                <span>Add (Minimal)</span>
-                <span className="text-xs bg-green-500 text-white font-bold px-2 py-0.5 rounded-full">Recommended</span>
-              </a>
-              <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-yellow-500 text-black font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors">
-                Add (Admin)
-              </a>
-            </div>
-          ) : (
-            <button
+        <div className="bg-discord-darker p-4 flex items-center justify-between mt-auto">
+          <button
               onClick={handleAddToServerClick}
               className="w-full text-center bg-discord-blurple text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors"
-            >
-              Add to Server
-            </button>
-          )}
+          >
+            Add to Server
+          </button>
         </div>
-    </div>
+      </div>
+      {isPopupOpen && (
+        <Popup
+          onClose={handleClosePopup}
+          administratorInviteUrl={bot.administratorInviteUrl}
+          minimalInviteUrl={bot.minimalInviteUrl}
+        />
+      )}
+    </>
   );
 };
 

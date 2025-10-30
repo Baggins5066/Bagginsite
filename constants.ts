@@ -4,7 +4,7 @@ import { Bot } from './types';
 export const BOTS_DATA: Bot[] = [
   {
     id: '1415012919921610864',
-    name: 'Meat Bot',
+    name: 'Meat Bro',
     avatarUrl: '',
     description: '',
     tags: ['AI','Character'],

@@ -43,7 +43,7 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="text-center py-6 text-sm text-discord-gray border-t border-discord-dark">
-        <p>&copy; 2024 Baggins. All rights reserved.</p>
+        <p>&copy; 2025 Baggins. All rights reserved.</p>
       </footer>
     </div>
   );

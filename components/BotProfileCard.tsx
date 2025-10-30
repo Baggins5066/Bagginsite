@@ -62,14 +62,14 @@ const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             {showAddButtons ? (
               <>
-                <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-lg shadow-lg hover:shadow-xl">
-                  Add (Admin)
-                </a>
                 <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-gray text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-lg shadow-lg hover:shadow-xl">
                   Add (Minimal)
+                </a>
+                <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-yellow-500 text-black font-bold py-3 px-6 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-lg shadow-lg hover:shadow-xl">
+                  Add (Admin)
                 </a>
               </>
             ) : (

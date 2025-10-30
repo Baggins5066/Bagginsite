@@ -8,8 +8,8 @@ export const BOTS_DATA: Bot[] = [
     avatarUrl: 'assets/Meat-Bro.png',
     description: "A brash and confident member of the Raw Meat Boyz movement; with a casual, slang-filled persona, he engages users while promoting confidence and camaraderie. Whether you're after motivation or just some banter, Meat Bro is here to enhance your Discord vibe!",
     tags: ['AI','Character'],
-    inviteUrl: 'https://discord.com/oauth2/authorize?client_id=1415012919921610864&permissions=8&integration_type=0&scope=bot',
-    // Minimal invite URL: https://discord.com/oauth2/authorize?client_id=1415012919921610864&permissions=274878028864&integration_type=0&scope=bot
+    administratorInviteUrl: 'https://discord.com/oauth2/authorize?client_id=1415012919921610864&permissions=8&integration_type=0&scope=bot',
+    minimalInviteUrl: 'https://discord.com/oauth2/authorize?client_id=1415012919921610864&permissions=274878028864&integration_type=0&scope=bot',
     isVerified: false,
   },
   {
@@ -18,8 +18,8 @@ export const BOTS_DATA: Bot[] = [
     avatarUrl: 'assets/Blevitron.png',
     description: 'Blevitron is a synthesized persona based on a real human personality. She is rude, humorous, and cares little for others. She might even treat you differently if she knows who you are! Blevitron is a sure way to make your Discord server more interesting.',
     tags: ['AI','Commands','Humanoid'],
-    inviteUrl: 'https://discord.com/oauth2/authorize?client_id=1430009844680884405&permissions=8&integration_type=0&scope=bot',
-    // Minimal invite URL: https://discord.com/oauth2/authorize?client_id=1430009844680884405&permissions=274878028864&integration_type=0&scope=bot
+    administratorInviteUrl: 'https://discord.com/oauth2/authorize?client_id=1430009844680884405&permissions=8&integration_type=0&scope=bot',
+    minimalInviteUrl: 'https://discord.com/oauth2/authorize?client_id=1430009844680884405&permissions=274878028864&integration_type=0&scope=bot',
     isVerified: false,
   },
 ];

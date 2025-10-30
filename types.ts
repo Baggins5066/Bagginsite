@@ -5,6 +5,7 @@ export interface Bot {
   avatarUrl: string;
   description: string;
   tags: string[];
-  inviteUrl: string;
+  administratorInviteUrl:string;
+  minimalInviteUrl:string;
   isVerified: boolean;
 }

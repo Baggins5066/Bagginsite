@@ -5,6 +5,7 @@ import Popup from './Popup';
 
 interface BotCardProps {
   bot: Bot;
+  onCardClick: (bot: Bot) => void;
 }
 
 const VerifiedIcon: React.FC = () => (
@@ -13,12 +14,25 @@ const VerifiedIcon: React.FC = () => (
     </svg>
 );
 
-const BotCard: React.FC<BotCardProps> = ({ bot }) => {
+const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleAddToServerClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setIsPopupOpen(false);
+  }
 
   return (
     <>
-      <div className="bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1">
+      <div
+        className="bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+        onClick={() => onCardClick(bot)}
+      >
         <div className="p-5 flex-grow">
           <div className="flex items-center mb-4">
             <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-16 h-16 rounded-full mr-4" />
@@ -42,7 +56,7 @@ const BotCard: React.FC<BotCardProps> = ({ bot }) => {
         </div>
         <div className="bg-discord-darker p-4 flex items-center justify-between mt-auto">
           <button
-              onClick={() => setIsPopupOpen(true)}
+              onClick={handleAddToServerClick}
               className="w-full text-center bg-discord-blurple text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors"
           >
             Add to Server
@@ -51,7 +65,7 @@ const BotCard: React.FC<BotCardProps> = ({ bot }) => {
       </div>
       {isPopupOpen && (
         <Popup
-          onClose={() => setIsPopupOpen(false)}
+          onClose={handleClosePopup}
           administratorInviteUrl={bot.administratorInviteUrl}
           minimalInviteUrl={bot.minimalInviteUrl}
         />

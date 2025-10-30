@@ -1,12 +1,15 @@
+
 import React, { useState, useMemo } from 'react';
 import { BOTS_DATA } from './constants';
 import { Bot } from './types';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import BotCard from './components/BotCard';
+import BotProfileCard from './components/BotProfileCard';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
 
   const filteredBots = useMemo(() => {
     if (!searchTerm) {
@@ -18,6 +21,14 @@ const App: React.FC = () => {
       bot.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   }, [searchTerm]);
+
+  const handleCardClick = (bot: Bot) => {
+    setSelectedBot(bot);
+  };
+
+  const handleCloseProfile = () => {
+    setSelectedBot(null);
+  };
 
   return (
     <div className="min-h-screen bg-discord-darker text-discord-light-gray font-sans">
@@ -32,7 +43,7 @@ const App: React.FC = () => {
         {filteredBots.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredBots.map(bot => (
-              <BotCard key={bot.id} bot={bot} />
+              <BotCard key={bot.id} bot={bot} onCardClick={handleCardClick} />
             ))}
           </div>
         ) : (
@@ -45,6 +56,10 @@ const App: React.FC = () => {
       <footer className="text-center py-6 text-sm text-discord-gray border-t border-discord-dark">
         <p>&copy; 2025 Baggins. All rights reserved.</p>
       </footer>
+
+      {selectedBot && (
+        <BotProfileCard bot={selectedBot} onClose={handleCloseProfile} />
+      )}
     </div>
   );
 };

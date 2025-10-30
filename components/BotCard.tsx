@@ -67,11 +67,12 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
             ))}
           </div>
         </div>
-        <div className="bg-discord-darker p-4 flex items-center justify-between mt-auto">
+        <div className="bg-discord-darker p-4 flex items-center justify-between mt-auto h-28">
           {showAddButtons ? (
             <div className="w-full grid grid-cols-1 gap-2">
-              <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-gray text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors">
-                Add (Minimal)
+              <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors flex justify-center items-center gap-2">
+                <span>Add (Minimal)</span>
+                <span className="text-xs bg-green-500 text-white font-bold px-2 py-0.5 rounded-full">Recommended</span>
               </a>
               <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-yellow-500 text-black font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors">
                 Add (Admin)

@@ -63,8 +63,9 @@ const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
 
           <div className="flex flex-wrap justify-center sm:justify-start gap-3 mb-8">
             {bot.tags.map(tag => (
-              <span key={tag} className="bg-discord-darker text-base text-discord-light-gray font-semibold px-4 py-2 rounded-full shadow-md">
-                {tag}
+              <span key={tag.name} className="bg-discord-darker text-base text-discord-light-gray font-semibold px-4 py-2 rounded-full shadow-md flex items-center gap-2">
+                {tag.icon && <span className="material-symbols-outlined text-base">{tag.icon}</span>}
+                {tag.name}
               </span>
             ))}
           </div>

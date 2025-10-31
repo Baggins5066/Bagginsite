@@ -1,4 +1,3 @@
-
 import { Bot } from './types';
 
 export const BOTS_DATA: Bot[] = [

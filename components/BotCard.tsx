@@ -43,49 +43,53 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
   return (
     <div
       ref={cardRef}
-      className="bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+      className="bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer transform hover:scale-105"
       onClick={() => onCardClick(bot)}
     >
         <div className="p-5 flex-grow">
           <div className="flex items-center mb-4">
-            <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-16 h-16 rounded-full mr-4" />
+            <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-20 h-20 rounded-full mr-4" />
             <div>
               <div className="flex items-center gap-2">
-                  <h3 className="text-xl font-bold text-white">{bot.name}</h3>
+                  <h3 className="text-2xl font-bold text-white">{bot.name}</h3>
                   {bot.isVerified && <VerifiedIcon />}
               </div>
             </div>
           </div>
-          <p className="text-discord-light-gray text-sm mb-4 h-20 overflow-hidden text-ellipsis">
+          <p className="text-discord-light-gray text-base mb-4 h-24 overflow-hidden text-ellipsis">
             {bot.description}
           </p>
           <div className="flex flex-wrap gap-2">
             {bot.tags.map(tag => (
-              <span key={tag} className="bg-discord-darker text-xs text-discord-light-gray font-semibold px-2 py-1 rounded-full">
+              <span key={tag} className="bg-discord-darker text-sm text-discord-light-gray font-semibold px-3 py-1 rounded-full">
                 {tag}
               </span>
             ))}
           </div>
         </div>
-        <div className="bg-discord-darker p-4 flex items-center justify-between mt-auto h-28">
-          {showAddButtons ? (
-            <div className="w-full grid grid-cols-1 gap-2">
-              <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors flex justify-center items-center gap-2">
-                <span>Minimal Permissions</span>
+        <div className="bg-discord-darker p-5 flex items-center justify-between mt-auto h-32">
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* "Add to Server" Button */}
+            <div className={`absolute w-full transition-all duration-300 ease-in-out ${showAddButtons ? 'opacity-0 transform -translate-y-5 pointer-events-none' : 'opacity-100 transform translate-y-0'}`}>
+              <button
+                onClick={handleAddToServerClick}
+                className="w-full text-center bg-discord-blurple text-white font-bold py-3 px-5 rounded-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 active:scale-95"
+              >
+                Add to Server
+              </button>
+            </div>
+
+            {/* Two Invite Buttons */}
+            <div className={`absolute w-full grid grid-cols-1 gap-3 transition-all duration-300 ease-in-out ${showAddButtons ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-5 pointer-events-none'}`}>
+              <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-3 px-5 rounded-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 active:scale-95 flex justify-center items-center gap-2">
+                <span>Minimal</span>
                 <span className="text-xs bg-green-500 text-white font-bold px-2 py-0.5 rounded-full">Recommended</span>
               </a>
-              <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-yellow-500 text-black font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors">
-                Administrator Permissions
+              <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-yellow-500 text-black font-bold py-3 px-5 rounded-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 active:scale-95">
+                Administrator
               </a>
             </div>
-          ) : (
-            <button
-              onClick={handleAddToServerClick}
-              className="w-full text-center bg-discord-blurple text-white font-bold py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors"
-            >
-              Add to Server
-            </button>
-          )}
+          </div>
         </div>
     </div>
   );

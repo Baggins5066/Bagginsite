@@ -18,7 +18,7 @@ const App: React.FC = () => {
     return BOTS_DATA.filter(bot =>
       bot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       bot.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      bot.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+      bot.tags.some(tag => tag.name.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   }, [searchTerm]);
 

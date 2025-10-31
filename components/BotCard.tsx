@@ -61,8 +61,9 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
           </p>
           <div className="flex flex-wrap gap-2">
             {bot.tags.map(tag => (
-              <span key={tag} className="bg-discord-darker text-sm text-discord-light-gray font-semibold px-3 py-1 rounded-full">
-                {tag}
+              <span key={tag.name} className="bg-discord-darker text-sm text-discord-light-gray font-semibold px-3 py-1 rounded-full flex items-center gap-2">
+                {tag.icon && <span className="material-symbols-outlined text-base">{tag.icon}</span>}
+                {tag.name}
               </span>
             ))}
           </div>

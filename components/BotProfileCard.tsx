@@ -30,7 +30,7 @@ const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
 
   return (
     <div className={`fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`} onClick={handleClose}>
-      <div className={`bg-discord-dark rounded-xl shadow-2xl w-full max-w-2xl mx-auto transform transition-transform duration-300 ${isClosing ? 'scale-95' : 'scale-100'}`} onClick={(e) => e.stopPropagation()}>
+      <div className={`bg-discord-dark rounded-xl shadow-2xl w-full max-w-2xl mx-auto transform transition-transform duration-300 ${isClosing ? 'scale-95' : 'scale-100'} animate-scale-in`} onClick={(e) => e.stopPropagation()}>
         <div className="p-8 relative">
           <button
             onClick={handleClose}

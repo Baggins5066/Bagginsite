@@ -83,11 +83,11 @@ const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
             {/* Two Invite Buttons */}
             <div className={`absolute w-full grid grid-cols-1 gap-3 transition-all duration-300 ease-in-out ${showAddButtons ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-5 pointer-events-none'}`}>
               <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-4 px-8 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-xl shadow-lg hover:shadow-xl flex justify-center items-center gap-2">
-                <span>Minimal</span>
+                <span>Minimal Permissions</span>
                 <span className="text-sm bg-green-500 text-white font-bold px-3 py-1 rounded-full">Recommended</span>
               </a>
               <a href={bot.administratorInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-yellow-500 text-black font-bold py-4 px-8 rounded-lg hover:bg-opacity-85 transition-all duration-300 text-xl shadow-lg hover:shadow-xl">
-                Administrator
+                Administrator Permissions
               </a>
             </div>
           </div>

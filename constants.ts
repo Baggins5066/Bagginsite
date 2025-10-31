@@ -10,7 +10,7 @@ export const BOTS_DATA: Bot[] = [
     administratorInviteUrl: 'https://discord.com/oauth2/authorize?client_id=1415012919921610864&permissions=8&integration_type=0&scope=bot',
     minimalInviteUrl: 'https://discord.com/oauth2/authorize?client_id=1415012919921610864&permissions=274878028864&integration_type=0&scope=bot',
     isVerified: false,
-    repoUrl: 'https://github.com/hallofmeat/CoachFrank',
+    repoUrl: 'https://github.com/Baggins5066/Meat-Bot',
   },
   {
     id: '1430009844680884405',
@@ -21,6 +21,6 @@ export const BOTS_DATA: Bot[] = [
     administratorInviteUrl: 'https://discord.com/oauth2/authorize?client_id=1430009844680884405&permissions=8&integration_type=0&scope=bot',
     minimalInviteUrl: 'https://discord.com/oauth2/authorize?client_id=1430009844680884405&permissions=274878028864&integration_type=0&scope=bot',
     isVerified: false,
-    repoUrl: 'https://github.com/hallofmeat/CoachFrank',
+    repoUrl: 'https://github.com/Baggins5066/Blevitron',
   },
 ];

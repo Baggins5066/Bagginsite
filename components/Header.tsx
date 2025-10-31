@@ -7,7 +7,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <img src={BagginsLogo} alt="Baggins Logo" className="w-8 h-8 rounded-full" />
-          <span className="text-white text-xl font-bold">Baggins <span className="font-light text-discord-gray">/ Discord Bots</span></span>
+          <span className="text-white text-xl font-bold">Bagginsite <span className="font-light text-discord-gray">/ Discord Bots</span></span>
         </div>
       </div>
     </header>

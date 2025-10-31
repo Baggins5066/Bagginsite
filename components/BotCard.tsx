@@ -68,8 +68,19 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
           </div>
         </div>
         <div className="bg-discord-darker p-5 flex items-center justify-between mt-auto h-32">
-          {showAddButtons ? (
-            <div className="w-full grid grid-cols-1 gap-3">
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* "Add to Server" Button */}
+            <div className={`absolute w-full transition-all duration-300 ease-in-out ${showAddButtons ? 'opacity-0 transform -translate-y-5 pointer-events-none' : 'opacity-100 transform translate-y-0'}`}>
+              <button
+                onClick={handleAddToServerClick}
+                className="w-full text-center bg-discord-blurple text-white font-bold py-3 px-5 rounded-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 active:scale-95"
+              >
+                Add to Server
+              </button>
+            </div>
+
+            {/* Two Invite Buttons */}
+            <div className={`absolute w-full grid grid-cols-1 gap-3 transition-all duration-300 ease-in-out ${showAddButtons ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-5 pointer-events-none'}`}>
               <a href={bot.minimalInviteUrl} target="_blank" rel="noopener noreferrer" className="text-center bg-discord-blurple text-white font-bold py-3 px-5 rounded-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 active:scale-95 flex justify-center items-center gap-2">
                 <span>Minimal</span>
                 <span className="text-xs bg-green-500 text-white font-bold px-2 py-0.5 rounded-full">Recommended</span>
@@ -78,14 +89,7 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
                 Administrator
               </a>
             </div>
-          ) : (
-            <button
-              onClick={handleAddToServerClick}
-              className="w-full text-center bg-discord-blurple text-white font-bold py-3 px-5 rounded-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 active:scale-95"
-            >
-              Add to Server
-            </button>
-          )}
+          </div>
         </div>
     </div>
   );

@@ -93,7 +93,7 @@ const Updates: React.FC<UpdatesProps> = ({ bots }) => {
               return [];
             }
             const [owner, repo] = urlParts;
-            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits`);
+            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=10`);
             if (!response.ok) {
               if (response.status === 403) {
                 console.warn(`Rate limit exceeded for ${url}.`);

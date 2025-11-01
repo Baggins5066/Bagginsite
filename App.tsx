@@ -54,7 +54,7 @@ const App: React.FC = () => {
           </div>
         )}
 
-        <Updates repoUrls={BOTS_DATA.map(bot => bot.repoUrl).filter((url): url is string => !!url)} />
+        <Updates bots={BOTS_DATA} />
 
       </main>
       <footer className="text-center py-6 text-sm text-discord-gray border-t border-discord-dark">

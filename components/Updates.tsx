@@ -56,7 +56,7 @@ const CommitCard: React.FC<{ commit: CommitWithBotInfo }> = ({ commit }) => {
           href={commit.html_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="ml-4 bg-discord-blurple text-white p-2 rounded-full hover:rounded-md flex items-center group transition-all duration-300 ease-in-out flex-shrink-0"
+          className="ml-4 bg-black text-white p-2 rounded-md flex items-center group transition-all duration-300 ease-in-out flex-shrink-0"
         >
           <GitHubIcon className="h-5 w-5" />
           <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 ease-in-out">
@@ -69,15 +69,17 @@ const CommitCard: React.FC<{ commit: CommitWithBotInfo }> = ({ commit }) => {
 };
 
 const Updates: React.FC<UpdatesProps> = ({ bots }) => {
-  const [commits, setCommits] = useState<CommitWithBotInfo[]>([]);
+  const [allCommits, setAllCommits] = useState<CommitWithBotInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const COMMITS_PER_PAGE = 10;
 
   useEffect(() => {
     const fetchCommits = async () => {
       setLoading(true);
       setError(null);
-      let allCommits: CommitWithBotInfo[] = [];
+      let fetchedCommits: CommitWithBotInfo[] = [];
 
       const botsWithRepos = bots.filter(bot => bot.repoUrl);
 
@@ -100,7 +102,7 @@ const Updates: React.FC<UpdatesProps> = ({ bots }) => {
               throw new Error(`Failed to fetch commits from ${url}`);
             }
             const data: GitHubCommit[] = await response.json();
-            return data.slice(0, 5).map(commit => ({
+            return data.map(commit => ({
               ...commit,
               botName: bot.name,
               botAvatarUrl: bot.avatarUrl,
@@ -112,11 +114,11 @@ const Updates: React.FC<UpdatesProps> = ({ bots }) => {
         });
 
         const results = await Promise.all(commitPromises);
-        allCommits = results.flat();
+        fetchedCommits = results.flat();
 
-        allCommits.sort((a, b) => new Date(b.commit.author.date).getTime() - new Date(a.commit.author.date).getTime());
+        fetchedCommits.sort((a, b) => new Date(b.commit.author.date).getTime() - new Date(a.commit.author.date).getTime());
 
-        setCommits(allCommits.slice(0, 10));
+        setAllCommits(fetchedCommits);
       } catch (e) {
         setError('Failed to fetch commit data.');
       } finally {
@@ -131,19 +133,53 @@ const Updates: React.FC<UpdatesProps> = ({ bots }) => {
     }
   }, [bots]);
 
+  const totalPages = Math.ceil(allCommits.length / COMMITS_PER_PAGE);
+  const paginatedCommits = allCommits.slice(currentPage * COMMITS_PER_PAGE, (currentPage + 1) * COMMITS_PER_PAGE);
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 0));
+  };
+
   return (
     <div className="mt-16">
       <h2 className="text-3xl font-bold text-white mb-6 text-center">Recent Updates</h2>
       <div className="max-w-3xl mx-auto">
         {loading && <p className="text-center">Loading updates...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
-        {!loading && !error && commits.length === 0 && <p className="text-center">No recent updates found.</p>}
-        {!loading && !error && commits.length > 0 && (
-          <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
-            {commits.map((commit) => (
-              <CommitCard key={commit.sha} commit={commit} />
-            ))}
-          </div>
+        {!loading && !error && allCommits.length === 0 && <p className="text-center">No recent updates found.</p>}
+        {!loading && !error && allCommits.length > 0 && (
+          <>
+            <div className="space-y-4">
+              {paginatedCommits.map((commit) => (
+                <CommitCard key={commit.sha} commit={commit} />
+              ))}
+            </div>
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center mt-6 space-x-4">
+                <button
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 0}
+                  className="bg-discord-blurple text-white px-4 py-2 rounded-md disabled:bg-discord-dark-gray disabled:cursor-not-allowed"
+                >
+                  Previous
+                </button>
+                <span className="text-white">
+                  Page {currentPage + 1} of {totalPages}
+                </span>
+                <button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages - 1}
+                  className="bg-discord-blurple text-white px-4 py-2 rounded-md disabled:bg-discord-dark-gray disabled:cursor-not-allowed"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

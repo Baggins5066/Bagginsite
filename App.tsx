@@ -6,6 +6,7 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import BotCard from './components/BotCard';
 import BotProfileCard from './components/BotProfileCard';
+import discordLogo from './assets/discord-logo.svg';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,7 +36,10 @@ const App: React.FC = () => {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Discord bots</h1>
+          <div className="flex justify-center items-center mb-2">
+            <img src={discordLogo} alt="Discord Logo" className="h-12 w-12 mr-4" />
+            <h1 className="text-4xl md:text-5xl font-bold text-white">Discord bots</h1>
+          </div>
         </div>
         
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />

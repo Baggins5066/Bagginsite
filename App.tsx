@@ -7,6 +7,7 @@ import SearchBar from './components/SearchBar';
 import BotCard from './components/BotCard';
 import BotProfileCard from './components/BotProfileCard';
 import discordLogo from './assets/discord-logo.svg';
+import Updates from './components/Updates';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -56,6 +57,9 @@ const App: React.FC = () => {
             <p className="text-discord-gray mt-2">Try adjusting your search term.</p>
           </div>
         )}
+
+        <Updates bots={BOTS_DATA} />
+
       </main>
       <footer className="text-center py-6 text-sm text-discord-gray border-t border-discord-dark">
         <p>&copy; 2025 Baggins. All rights reserved.</p>

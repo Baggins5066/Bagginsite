@@ -13,4 +13,5 @@ export interface Bot {
   administratorInviteUrl:string;
   minimalInviteUrl:string;
   isVerified: boolean;
+  repoUrl?: string;
 }

@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
         port: 5000,
         host: '0.0.0.0',
         strictPort: true,
-        allowedHosts: ['.replit.dev', 'bagginsite.replit.app'],
+        allowedHosts: ['.replit.dev', 'bagginsite.replit.app','baggins5066.github.io/Bagginsite/'],
       },
       plugins: [react()],
       define: {

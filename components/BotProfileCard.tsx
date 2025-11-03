@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Bot } from '../types';
+import { useBotLastUpdated } from '../hooks/useBotLastUpdated';
 
 interface BotProfileCardProps {
   bot: Bot;
@@ -14,7 +15,16 @@ const VerifiedIcon: React.FC = () => (
 );
 
 const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
+  const { lastUpdated, loading, error } = useBotLastUpdated(bot);
   const [showAddButtons, setShowAddButtons] = useState(false);
+
+  const wasUpdatedRecently = () => {
+    if (!lastUpdated) return false;
+    const lastUpdatedDate = new Date(lastUpdated);
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    return lastUpdatedDate > oneWeekAgo;
+  };
 
   const handleAddToServerClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -48,6 +58,22 @@ const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
               <div className="flex items-center justify-center sm:justify-start gap-3">
                 <h2 className="text-5xl font-bold text-white">{bot.name}</h2>
                 {bot.isVerified && <VerifiedIcon />}
+              </div>
+              <div className="mt-2 text-sm text-discord-gray">
+                {loading && <span>Loading last updated date...</span>}
+                {error && <span className="text-red-500">Error: {error}</span>}
+                {!loading && !error && lastUpdated && (
+                  <div className="flex items-center gap-2">
+                    <p>
+                      Last updated: {new Date(lastUpdated).toLocaleDateString()}
+                    </p>
+                    {wasUpdatedRecently() && (
+                      <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full animate-pulse">
+                        Updated recently
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

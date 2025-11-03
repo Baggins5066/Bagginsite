@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const { botsWithUpdates, loading: botsLoading, error: botsError } = useAllBotsLastUpdated(BOTS_DATA);
 
   const filteredBots = useMemo(() => {
-    const botsToFilter = botsWithUpdates || BOTS_DATA;
+    const botsToFilter = botsWithUpdates.length > 0 ? botsWithUpdates : BOTS_DATA;
     if (!searchTerm) {
       return botsToFilter;
     }

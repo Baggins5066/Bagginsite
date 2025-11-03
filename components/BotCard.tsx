@@ -51,13 +51,13 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
   return (
     <div
       ref={cardRef}
-      className="relative bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer transform hover:scale-105"
+      className="relative bg-discord-dark rounded-lg shadow-lg flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer transform hover:scale-105"
       onClick={() => onCardClick(bot)}
     >
       {wasUpdatedRecently() && (
-        <div className="absolute top-2 right-2 z-10">
+        <div className="absolute top-0 right-0 z-10 transform translate-x-1/4 -translate-y-1/2">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-base font-bold bg-green-500 text-white animate-glow-strong">
-            Updated Recently
+            Updated
           </span>
         </div>
       )}

@@ -14,4 +14,5 @@ export interface Bot {
   minimalInviteUrl:string;
   isVerified: boolean;
   repoUrl?: string;
+  lastUpdated?: string;
 }

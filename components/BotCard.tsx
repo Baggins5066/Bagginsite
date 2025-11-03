@@ -40,15 +40,30 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
     };
   }, []);
 
+  const wasUpdatedRecently = () => {
+    if (!bot.lastUpdated) return false;
+    const lastUpdatedDate = new Date(bot.lastUpdated);
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    return lastUpdatedDate > oneWeekAgo;
+  };
+
   return (
     <div
       ref={cardRef}
-      className="bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer transform hover:scale-105"
+      className="relative bg-discord-dark rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-discord-blurple/30 hover:shadow-2xl hover:-translate-y-1 cursor-pointer transform hover:scale-105"
       onClick={() => onCardClick(bot)}
     >
-        <div className="p-5 flex-grow">
-          <div className="flex items-center mb-4">
-            <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-20 h-20 rounded-full mr-4" />
+      {wasUpdatedRecently() && (
+        <div className="absolute top-2 right-2 z-10">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-base font-bold bg-green-500 text-white animate-glow-strong">
+            Updated Recently
+          </span>
+        </div>
+      )}
+      <div className="p-5 flex-grow">
+        <div className="flex items-center mb-4">
+          <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-20 h-20 rounded-full mr-4" />
             <div>
               <div className="flex items-center gap-2">
                   <h3 className="text-2xl font-bold text-white">{bot.name}</h3>

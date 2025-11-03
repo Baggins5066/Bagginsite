@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { BOTS_DATA } from './constants';
 import { Bot } from './types';
+import { useAllBotsLastUpdated } from './hooks/useAllBotsLastUpdated';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import BotCard from './components/BotCard';
@@ -12,20 +13,23 @@ import Updates from './components/Updates';
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
+  const { botsWithUpdates, loading: botsLoading, error: botsError } = useAllBotsLastUpdated(BOTS_DATA);
 
   const filteredBots = useMemo(() => {
+    const botsToFilter = botsWithUpdates || BOTS_DATA;
     if (!searchTerm) {
-      return BOTS_DATA;
+      return botsToFilter;
     }
-    return BOTS_DATA.filter(bot =>
+    return botsToFilter.filter(bot =>
       bot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       bot.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       bot.tags.some(tag => tag.name.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-  }, [searchTerm]);
+  }, [searchTerm, botsWithUpdates]);
 
   const handleCardClick = (bot: Bot) => {
-    setSelectedBot(bot);
+    const botWithUpdate = botsWithUpdates.find(b => b.id === bot.id) || bot;
+    setSelectedBot(botWithUpdate);
   };
 
   const handleCloseProfile = () => {

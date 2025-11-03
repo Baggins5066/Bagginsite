@@ -7,6 +7,10 @@
     animation: scaleIn 0.3s ease-out;
   }
 
+  .animate-glow-strong {
+    animation: glow-strong 2s infinite ease-in-out;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -22,6 +26,15 @@
     }
     to {
       transform: scale(1);
+    }
+  }
+
+  @keyframes glow-strong {
+    0%, 100% {
+      box-shadow: 0 0 12px 3px rgba(74, 222, 128, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 20px 8px rgba(74, 222, 128, 0.9);
     }
   }
 }

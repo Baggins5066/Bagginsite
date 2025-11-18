@@ -5,13 +5,29 @@ import BagginsLogo from '../assets/Baggins-logo.png';
 const Header: React.FC = () => {
   const location = useLocation();
 
+  // Get the current page name based on the path
+  const getPageName = () => {
+    switch (location.pathname) {
+      case '/':
+        return 'Home';
+      case '/apps':
+        return 'Apps';
+      case '/discord-bots':
+        return 'Discord Bots';
+      default:
+        return 'Home';
+    }
+  };
+
   return (
     <header className="bg-discord-dark py-4 shadow-lg">
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+        <div className="flex items-center space-x-3">
           <img src={BagginsLogo} alt="Baggins Logo" className="w-8 h-8 rounded-full" />
-          <span className="text-white text-xl font-bold">Bagginsite</span>
-        </Link>
+          <span className="text-white text-xl font-bold">
+            Bagginsite <span className="font-light text-discord-gray">/ {getPageName()}</span>
+          </span>
+        </div>
         <nav className="flex space-x-6">
           <Link 
             to="/" 

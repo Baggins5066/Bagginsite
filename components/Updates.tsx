@@ -43,20 +43,20 @@ const CommitCard: React.FC<{ commit: CommitWithBotInfo }> = ({ commit }) => {
     <div
       className="bg-discord-dark p-4 rounded-lg animate-fade-in"
     >
-      <div className="flex items-center">
-        <img src={commit.botAvatarUrl} alt={commit.botName} className="w-10 h-10 rounded-full mr-4" />
-        <div className="flex-grow">
+      <div className="flex items-start gap-4">
+        <img src={commit.botAvatarUrl} alt={commit.botName} className="w-10 h-10 rounded-full flex-shrink-0" />
+        <div className="flex-grow min-w-0">
           <p className="text-sm text-discord-light-gray">
             <span className="font-semibold text-white">{commit.botName}</span>
             <span className="ml-2 text-xs text-discord-gray">{new Date(commit.commit.author.date).toLocaleDateString()}</span>
           </p>
-          <p className="text-white truncate mt-1">{commit.commit.message.split('\n')[0]}</p>
+          <p className="text-white mt-1 break-words">{commit.commit.message.split('\n')[0]}</p>
         </div>
         <a
           href={commit.html_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="ml-4 bg-black text-white p-2 rounded-md flex items-center group transition-all duration-300 ease-in-out flex-shrink-0"
+          className="bg-black text-white p-2 rounded-md flex items-center group transition-all duration-300 ease-in-out flex-shrink-0"
         >
           <GitHubIcon className="h-5 w-5" />
           <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 ease-in-out">

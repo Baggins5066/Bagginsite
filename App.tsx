@@ -7,8 +7,11 @@ import Apps from './pages/Apps';
 import DiscordBots from './pages/DiscordBots';
 
 const App: React.FC = () => {
+  // Use basename only in production to match GitHub Pages deployment
+  const basename = import.meta.env.PROD ? '/Bagginsite' : '/';
+  
   return (
-    <Router basename="/Bagginsite">
+    <Router basename={basename}>
       <div className="min-h-screen bg-discord-darker">
         <Header />
         <Routes>

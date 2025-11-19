@@ -9,13 +9,13 @@ const Header: React.FC = () => {
   const getPageInfo = () => {
     switch (location.pathname) {
       case '/':
-        return { name: 'Home', path: '/' };
+        return null; // No breadcrumb suffix for home page
       case '/apps':
         return { name: 'Apps', path: '/apps' };
       case '/discord-bots':
         return { name: 'Discord Bots', path: '/discord-bots' };
       default:
-        return { name: 'Home', path: '/' };
+        return null;
     }
   };
 
@@ -30,10 +30,14 @@ const Header: React.FC = () => {
             <Link to="/" className="hover:opacity-80 transition-opacity">
               Bagginsite
             </Link>
-            <span className="font-light text-discord-gray"> / </span>
-            <Link to={pageInfo.path} className="font-light text-discord-gray hover:text-white transition-colors">
-              {pageInfo.name}
-            </Link>
+            {pageInfo && (
+              <>
+                <span className="font-light text-discord-gray"> / </span>
+                <Link to={pageInfo.path} className="font-light text-discord-gray hover:text-white transition-colors">
+                  {pageInfo.name}
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

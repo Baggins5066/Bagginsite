@@ -20,9 +20,8 @@ const Apps: React.FC = () => {
             <div className="text-center">
               <div className="text-4xl mb-3">💼</div>
               <h2 className="text-2xl font-bold text-white mb-2">Portfolio Balancer</h2>
-              <p className="text-discord-gray">Balance your investment portfolio</p>
               <div className="mt-4 text-sm text-discord-gray group-hover:text-white transition-colors">
-                Click to visit →
+                Launch
               </div>
             </div>
           </a>

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import discordLogo from '../assets/discord-logo.svg';
 
 const Home: React.FC = () => {
   return (
@@ -27,7 +28,9 @@ const Home: React.FC = () => {
             className="bg-discord-dark hover:bg-discord-dark/80 transition-all duration-300 p-8 rounded-lg shadow-lg border border-discord-dark hover:border-discord-gray/30"
           >
             <div className="text-center">
-              <div className="text-5xl mb-4">🤖</div>
+              <div className="mb-4 flex justify-center">
+                <img src={discordLogo} alt="Discord Logo" className="h-12 w-12" />
+              </div>
               <h2 className="text-3xl font-bold text-white mb-3">Discord Bots</h2>
               <p className="text-discord-gray">By Baggins</p>
             </div>

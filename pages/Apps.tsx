@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Apps: React.FC = () => {
@@ -21,7 +20,7 @@ const Apps: React.FC = () => {
               <div className="text-4xl mb-3">💼</div>
               <h2 className="text-2xl font-bold text-white mb-2">Portfolio Balancer</h2>
               <div className="mt-4 text-sm text-discord-gray group-hover:text-white transition-colors">
-                Launch
+                Launch <span className="material-icons text-sm align-middle">open_in_new</span>
               </div>
             </div>
           </a>

@@ -6,6 +6,7 @@ import React,
   useEffect
 } from 'react';
 import { Bot } from '../types';
+import StatusIndicator from './StatusIndicator';
 
 interface BotCardProps {
   bot: Bot;
@@ -63,14 +64,22 @@ const BotCard: React.FC<BotCardProps> = ({ bot, onCardClick }) => {
       )}
       <div className="p-5 flex-grow">
         <div className="flex items-center mb-4">
-          <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-20 h-20 rounded-full mr-4" />
-            <div>
-              <div className="flex items-center gap-2">
-                  <h3 className="text-2xl font-bold text-white">{bot.name}</h3>
-                  {bot.isVerified && <VerifiedIcon />}
-              </div>
+          <div className="relative">
+            <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-20 h-20 rounded-full mr-4" />
+            <div className="absolute bottom-0 right-4 transform translate-x-1/2 translate-y-1/2">
+              <div className={`rounded-full ${bot.isOnline === true ? 'bg-green-500 animate-pulse' : bot.isOnline === false ? 'bg-gray-500' : 'bg-yellow-500'} w-5 h-5 border-2 border-discord-dark`} 
+                   title={bot.isOnline === true ? 'Online' : bot.isOnline === false ? 'Offline' : 'Status Unknown'}
+                   aria-label={`Status: ${bot.isOnline === true ? 'Online' : bot.isOnline === false ? 'Offline' : 'Unknown'}`} />
             </div>
           </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="text-2xl font-bold text-white">{bot.name}</h3>
+              {bot.isVerified && <VerifiedIcon />}
+            </div>
+            <StatusIndicator isOnline={bot.isOnline} size="small" />
+          </div>
+        </div>
           <p className="text-discord-light-gray text-base mb-4 h-24 overflow-hidden text-ellipsis">
             {bot.description}
           </p>

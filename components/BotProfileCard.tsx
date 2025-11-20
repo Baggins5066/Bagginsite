@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Bot } from '../types';
+import StatusIndicator from './StatusIndicator';
 
 interface BotProfileCardProps {
   bot: Bot;
@@ -43,11 +44,21 @@ const BotProfileCard: React.FC<BotProfileCardProps> = ({ bot, onClose }) => {
           </button>
 
           <div className="flex flex-col sm:flex-row items-center mb-6 text-center sm:text-left">
-            <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-32 h-32 rounded-full mr-0 sm:mr-6 mb-4 sm:mb-0 border-4 border-discord-darker" />
+            <div className="relative mb-4 sm:mb-0">
+              <img src={bot.avatarUrl} alt={`${bot.name} avatar`} className="w-32 h-32 rounded-full mr-0 sm:mr-6 border-4 border-discord-darker" />
+              <div className="absolute bottom-0 right-0 sm:right-6 transform translate-x-1/4 translate-y-1/4">
+                <div className={`rounded-full ${bot.isOnline === true ? 'bg-green-500 animate-pulse' : bot.isOnline === false ? 'bg-gray-500' : 'bg-yellow-500'} w-8 h-8 border-4 border-discord-dark`}
+                     title={bot.isOnline === true ? 'Online' : bot.isOnline === false ? 'Offline' : 'Status Unknown'}
+                     aria-label={`Status: ${bot.isOnline === true ? 'Online' : bot.isOnline === false ? 'Offline' : 'Unknown'}`} />
+              </div>
+            </div>
             <div>
               <div className="flex items-center justify-center sm:justify-start gap-3">
                 <h2 className="text-5xl font-bold text-white">{bot.name}</h2>
                 {bot.isVerified && <VerifiedIcon />}
+              </div>
+              <div className="mt-2 flex justify-center sm:justify-start">
+                <StatusIndicator isOnline={bot.isOnline} size="medium" />
               </div>
               {bot.lastUpdated && (
                 <div className="mt-2 text-sm text-discord-gray">

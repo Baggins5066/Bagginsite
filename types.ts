@@ -15,4 +15,5 @@ export interface Bot {
   isVerified: boolean;
   repoUrl?: string;
   lastUpdated?: string;
+  isOnline?: boolean;
 }

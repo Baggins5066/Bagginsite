@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { BOTS_DATA } from '../constants';
 import { Bot } from '../types';
 import { useAllBotsLastUpdated } from '../hooks/useAllBotsLastUpdated';
+import { useBotStatus } from '../hooks/useBotStatus';
 import SearchBar from '../components/SearchBar';
 import BotCard from '../components/BotCard';
 import BotProfileCard from '../components/BotProfileCard';
@@ -13,9 +14,10 @@ const DiscordBots: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
   const { botsWithUpdates, loading: botsLoading, error: botsError } = useAllBotsLastUpdated(BOTS_DATA);
+  const { botsWithStatus, loading: statusLoading, error: statusError } = useBotStatus(botsWithUpdates.length > 0 ? botsWithUpdates : BOTS_DATA);
 
   const filteredBots = useMemo(() => {
-    const botsToFilter = botsWithUpdates.length > 0 ? botsWithUpdates : BOTS_DATA;
+    const botsToFilter = botsWithStatus.length > 0 ? botsWithStatus : (botsWithUpdates.length > 0 ? botsWithUpdates : BOTS_DATA);
     if (!searchTerm) {
       return botsToFilter;
     }
@@ -24,11 +26,11 @@ const DiscordBots: React.FC = () => {
       bot.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       bot.tags.some(tag => tag.name.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-  }, [searchTerm, botsWithUpdates]);
+  }, [searchTerm, botsWithStatus, botsWithUpdates]);
 
   const handleCardClick = (bot: Bot) => {
-    const botWithUpdate = botsWithUpdates.find(b => b.id === bot.id) || bot;
-    setSelectedBot(botWithUpdate);
+    const botWithAllData = botsWithStatus.find(b => b.id === bot.id) || bot;
+    setSelectedBot(botWithAllData);
   };
 
   const handleCloseProfile = () => {

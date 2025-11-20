@@ -11,7 +11,7 @@ const Apps: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           <a 
-            href="https://baggins5066.github.io/portfolio-balancer/" 
+            href="https://Baggins5066.github.io/Portfolio-Balancer/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="bg-discord-dark hover:bg-discord-dark/80 transition-all duration-300 p-6 rounded-lg shadow-lg border border-discord-dark hover:border-discord-gray/30 group"

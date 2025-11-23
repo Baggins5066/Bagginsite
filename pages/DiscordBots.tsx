@@ -7,12 +7,15 @@ import { useBotStatus } from '../hooks/useBotStatus';
 import SearchBar from '../components/SearchBar';
 import BotCard from '../components/BotCard';
 import BotProfileCard from '../components/BotProfileCard';
+import SuggestBotCard from '../components/SuggestBotCard';
+import SuggestBotPopup from '../components/SuggestBotPopup';
 import discordLogo from '../assets/discord-logo.svg';
 import Updates from '../components/Updates';
 
 const DiscordBots: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
+  const [showSuggestPopup, setShowSuggestPopup] = useState(false);
   const { botsWithUpdates, loading: botsLoading, error: botsError } = useAllBotsLastUpdated(BOTS_DATA);
   const { botsWithStatus, loading: statusLoading, error: statusError } = useBotStatus(botsWithUpdates.length > 0 ? botsWithUpdates : BOTS_DATA);
 
@@ -37,6 +40,14 @@ const DiscordBots: React.FC = () => {
     setSelectedBot(null);
   };
 
+  const handleSuggestBotClick = () => {
+    setShowSuggestPopup(true);
+  };
+
+  const handleCloseSuggestPopup = () => {
+    setShowSuggestPopup(false);
+  };
+
   return (
     <div className="min-h-screen bg-discord-darker text-discord-light-gray font-sans">
       <main className="container mx-auto px-4 py-8">
@@ -54,6 +65,7 @@ const DiscordBots: React.FC = () => {
             {filteredBots.map(bot => (
               <BotCard key={bot.id} bot={bot} onCardClick={handleCardClick} />
             ))}
+            {!searchTerm && <SuggestBotCard onClick={handleSuggestBotClick} />}
           </div>
         ) : (
           <div className="text-center py-16">
@@ -68,6 +80,10 @@ const DiscordBots: React.FC = () => {
 
       {selectedBot && (
         <BotProfileCard bot={selectedBot} onClose={handleCloseProfile} />
+      )}
+
+      {showSuggestPopup && (
+        <SuggestBotPopup onClose={handleCloseSuggestPopup} />
       )}
     </div>
   );

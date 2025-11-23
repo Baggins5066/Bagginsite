@@ -23,12 +23,6 @@ const SuggestBotCard: React.FC<SuggestBotCardProps> = ({ onClick }) => {
         <p className="text-discord-light-gray text-base mb-4 h-24 overflow-hidden text-ellipsis">
           Got an idea for a bot you'd like to see? Click here to suggest a new bot and share your thoughts with us!
         </p>
-        <div className="flex flex-wrap gap-2">
-          <span className="bg-discord-blurple text-sm text-white font-semibold px-3 py-1 rounded-full flex items-center gap-2">
-            <span className="material-symbols-outlined text-base">lightbulb</span>
-            Suggestion
-          </span>
-        </div>
       </div>
       <div className="bg-discord-darker p-5 flex items-center justify-center mt-auto h-32">
         <button className="w-full text-center bg-discord-blurple text-white font-bold py-3 px-5 rounded-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 active:scale-95">

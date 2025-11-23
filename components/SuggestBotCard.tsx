@@ -21,7 +21,7 @@ const SuggestBotCard: React.FC<SuggestBotCardProps> = ({ onClick }) => {
           </div>
         </div>
         <p className="text-discord-light-gray text-base mb-4 h-24 overflow-hidden text-ellipsis">
-          Got an idea for a bot you'd like to see? Click here to suggest a new bot and share your thoughts with us!
+          Got an idea for a bot you'd like to see? Click here to suggest a new bot!
         </p>
       </div>
       <div className="bg-discord-darker p-5 flex items-center justify-center mt-auto h-32">

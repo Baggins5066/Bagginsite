@@ -13,7 +13,7 @@ const SuggestBotCard: React.FC<SuggestBotCardProps> = ({ onClick }) => {
       <div className="p-5 flex-grow">
         <div className="flex items-center mb-4">
           <div className="w-20 h-20 rounded-full mr-4 bg-discord-darker flex items-center justify-center">
-            <span className="material-symbols-outlined text-5xl text-discord-blurple">add_circle</span>
+            <span className="material-symbols-outlined text-5xl text-discord-blurple">contact_page</span>
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="text-2xl font-bold text-white">Suggest a Bot</h3>
